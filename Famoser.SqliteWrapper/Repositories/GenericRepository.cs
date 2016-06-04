@@ -24,6 +24,14 @@ namespace Famoser.SqliteWrapper.Repositories
             _exceptionLogger = exceptionLogger;
         }
 
+        private void LogOrThrow(Exception ex)
+        {
+            if (_exceptionLogger != null)
+                _exceptionLogger.LogException(ex);
+            else
+                throw ex;
+        }
+
         public async Task<TBusiness> GetById(int id)
         {
             try
@@ -43,14 +51,6 @@ namespace Famoser.SqliteWrapper.Repositories
                 LogOrThrow(ex);
             }
             return null;
-        }
-
-        private void LogOrThrow(Exception ex)
-        {
-            if (_exceptionLogger != null)
-                _exceptionLogger.LogException(ex);
-            else
-                throw ex;
         }
 
         public async Task<bool> Delete(TBusiness business)
