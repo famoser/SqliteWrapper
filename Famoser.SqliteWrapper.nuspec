@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>Famoser.SqliteWrapper</id>
+        <version>1.0.2</version>
+        <authors>Florian Moser</authors>
+        <projectUrl>https://github.com/famoser/SqliteWrapper</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>This packages serves as a wrapper for an sqlite database.
+		Go to github for instructions on how to use this library</description>
+        <releaseNotes>initial release</releaseNotes>
+		<dependencies>
+			<dependency id="Famoser.FrameworkEssentials" version="2.4.3" />
+			<dependency id="Nito.AsyncEx" version="3.0.1" />
+			<dependency id="SQLite.Net.Core-PCL" version="3.1.1" />
+			<dependency id="SQLite.Net.Async-PCL" version="3.1.1" />
+		</dependencies>
+    </metadata>
+    <files>
+        <file src="Famoser.SqliteWrapper\bin\Release\Famoser.SqliteWrapper.dll" target="lib\uap10.0\Famoser.SqliteWrapper.dll" />
+    </files>
+</package>

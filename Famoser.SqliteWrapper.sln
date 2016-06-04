@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Famoser.SqliteWrapper", "SqliteWrapper\Famoser.SqliteWrapper.csproj", "{934EA1C8-C3BF-4AC2-BBA4-B59B20415295}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Famoser.SqliteWrapper", "Famoser.SqliteWrapper\Famoser.SqliteWrapper.csproj", "{934EA1C8-C3BF-4AC2-BBA4-B59B20415295}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

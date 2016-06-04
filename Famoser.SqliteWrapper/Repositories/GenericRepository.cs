@@ -18,7 +18,7 @@ namespace Famoser.SqliteWrapper.Repositories
         private readonly ISqliteService _dataService;
         private readonly IExceptionLogger _exceptionLogger;
 
-        public GenericRepository(ISqliteService dataService, IExceptionLogger exceptionLogger)
+        public GenericRepository(ISqliteService dataService, IExceptionLogger exceptionLogger = null)
         {
             _dataService = dataService;
             _exceptionLogger = exceptionLogger;
