@@ -1,4 +1,6 @@
-﻿namespace Famoser.SqliteWrapper.Attributes.Interface
+﻿using Famoser.SqliteWrapper.Converters.Interface;
+
+namespace Famoser.SqliteWrapper.Converters
 {
     public class EnumConverter<T> : IEntityMappingConverter
     {

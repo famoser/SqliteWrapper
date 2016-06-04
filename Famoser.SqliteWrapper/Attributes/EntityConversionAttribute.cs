@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Famoser.SqliteWrapper.Attributes.Interface;
+using Famoser.SqliteWrapper.Converters;
+using Famoser.SqliteWrapper.Converters.Interface;
 using Famoser.SqliteWrapper.Exceptions;
 
 namespace Famoser.SqliteWrapper.Attributes
