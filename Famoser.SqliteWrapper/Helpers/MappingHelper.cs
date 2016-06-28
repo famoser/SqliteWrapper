@@ -146,7 +146,7 @@ namespace Famoser.SqliteWrapper.Helpers
             var conversionAttribute = propertyInfo.GetCustomAttribute(typeof(EntityConversionAttribute), false) as EntityConversionAttribute;
             if (conversionAttribute != null)
             {
-                value = fromBuiness ? conversionAttribute.Converter.ConvertBack(value) : conversionAttribute.Converter.Convert(value);
+                value = fromBuiness ? conversionAttribute.Converter.ConvertToEntityFormat(value) : conversionAttribute.Converter.ConvertToModelFormat(value);
             }
 
             return value;

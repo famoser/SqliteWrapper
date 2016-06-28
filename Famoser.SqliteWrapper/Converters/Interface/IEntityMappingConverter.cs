@@ -2,8 +2,8 @@
 {
     public interface IEntityMappingConverter
     {
-        object Convert(object val);
+        object ConvertToModelFormat(object entityFormat);
 
-        object ConvertBack(object val);
+        object ConvertToEntityFormat(object modelFormat);
     }
 }

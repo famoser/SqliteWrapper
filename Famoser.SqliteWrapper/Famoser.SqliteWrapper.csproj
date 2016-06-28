@@ -36,8 +36,11 @@
   <ItemGroup>
     <Compile Include="Attributes\EntityConversionAttribute.cs" />
     <Compile Include="Attributes\EntityMapAttribute.cs" />
+    <Compile Include="Converters\Base\BaseStringConverter.cs" />
     <Compile Include="Converters\EnumConverter.cs" />
+    <Compile Include="Converters\GuidStringConverter.cs" />
     <Compile Include="Converters\Interface\IEntityMappingConverter.cs" />
+    <Compile Include="Converters\UriStringConverter.cs" />
     <Compile Include="Exceptions\ConverterNotFoundException.cs" />
     <Compile Include="Exceptions\PropertyNotFoundException.cs" />
     <Compile Include="Helpers\MappingHelper.cs" />

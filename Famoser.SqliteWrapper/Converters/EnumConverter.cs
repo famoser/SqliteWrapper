@@ -2,20 +2,20 @@
 
 namespace Famoser.SqliteWrapper.Converters
 {
-    public class EnumConverter<T> : IEntityMappingConverter
+    public class EnumIntConverter<T> : IEntityMappingConverter
     {
-        public object Convert(object val)
+        public object ConvertToModelFormat(object entityFormat)
         {
-            if (val == null)
+            if (entityFormat == null)
                 return default(T);
-            return (T)val;
+            return (T)entityFormat;
         }
 
-        public object ConvertBack(object val)
+        public object ConvertToEntityFormat(object modelFormat)
         {
-            if (val == null)
+            if (modelFormat == null)
                 return 0;
-            return (int)val;
+            return (int)modelFormat;
         }
     }
 }

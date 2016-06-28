@@ -39,7 +39,7 @@ namespace Famoser.SqliteWrapper.Attributes
 
             if (entityType == typeof(int) && modelType.GetTypeInfo().IsEnum)
             {
-                Type repo = typeof(EnumConverter<>);
+                Type repo = typeof(EnumIntConverter<>);
                 Type[] args = { modelType };
                 Type constructed = repo.MakeGenericType(args);
 
