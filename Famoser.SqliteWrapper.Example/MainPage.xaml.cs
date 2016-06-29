@@ -47,26 +47,26 @@ namespace Famoser.SqliteWrapper.Example
 
         private async void SaveButton(object sender, RoutedEventArgs e)
         {
-            await _repo.Save(_model);
+            await _repo.SaveAsync(_model);
             InfoTextBlock.Text = "Saved! got Id: " + _model.GetId();
         }
 
         private async void LoadButton(object sender, RoutedEventArgs e)
         {
-            _model = await _repo.GetById(_model.GetId());
+            _model = await _repo.GetByIdAsync(_model.GetId());
             InfoTextBlock.Text = "Inhalt: " + JsonConvert.SerializeObject(_model);
         }
 
         private async void RemoveButton(object sender, RoutedEventArgs e)
         {
-            await _repo.Delete(_model);
+            await _repo.DeleteAsync(_model);
             InfoTextBlock.Text = "Removed from Database!";
         }
 
         private async void AddButton(object sender, RoutedEventArgs e)
         {
             var model = new MyModel();
-            await _repo.Save(model);
+            await _repo.SaveAsync(model);
             InfoTextBlock.Text = "Added! got Id: " + model.GetId();
         }
     }

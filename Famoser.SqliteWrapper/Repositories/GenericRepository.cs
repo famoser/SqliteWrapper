@@ -32,7 +32,7 @@ namespace Famoser.SqliteWrapper.Repositories
                 throw ex;
         }
 
-        public async Task<TBusiness> GetById(int id)
+        public async Task<TBusiness> GetByIdAsync(int id)
         {
             try
             {
@@ -53,56 +53,7 @@ namespace Famoser.SqliteWrapper.Repositories
             return null;
         }
 
-        public async Task<bool> Delete(TBusiness business)
-        {
-            try
-            {
-                var entity = MappingHelper.ConvertToEntity(business, new TEntity());
-                if (await Delete(entity.Id))
-                {
-                    business.SetId(0);
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                LogOrThrow(ex);
-            }
-            return false;
-        }
-
-        public async Task<bool> Delete(int id)
-        {
-            try
-            {
-                return await _dataService.DeleteById<TEntity>(id);
-            }
-            catch (Exception ex)
-            {
-                LogOrThrow(ex);
-            }
-            return false;
-        }
-
-        public async Task<List<TBusiness>> GetByCondition(Expression<Func<TEntity, bool>> func, Expression<Func<TEntity, object>> orderByProperty = null, bool descending = false, int limit = 0, int skip = 0)
-        {
-            try
-            {
-                var entityList = await _dataService.GetByCondition(func, orderByProperty, descending, limit, skip);
-
-                if (entityList.Any())
-                {
-                    return (from entity in entityList let business = new TBusiness() select MappingHelper.ConvertToModel(entity, business)).ToList();
-                }
-            }
-            catch (Exception ex)
-            {
-                LogOrThrow(ex);
-            }
-            return new List<TBusiness>();
-        }
-
-        public async Task<List<TBusiness>> GetAll()
+        public async Task<List<TBusiness>> GetAllAsync()
         {
             try
             {
@@ -120,7 +71,56 @@ namespace Famoser.SqliteWrapper.Repositories
             return new List<TBusiness>();
         }
 
-        public async Task<int> CountByCondition(Expression<Func<TEntity, bool>> func)
+        public async Task<bool> DeleteAsync(TBusiness business)
+        {
+            try
+            {
+                var entity = MappingHelper.ConvertToEntity(business, new TEntity());
+                if (await DeleteAsync(entity.Id))
+                {
+                    business.SetId(0);
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogOrThrow(ex);
+            }
+            return false;
+        }
+
+        public async Task<bool> DeleteAsync(int id)
+        {
+            try
+            {
+                return await _dataService.DeleteById<TEntity>(id);
+            }
+            catch (Exception ex)
+            {
+                LogOrThrow(ex);
+            }
+            return false;
+        }
+
+        public async Task<List<TBusiness>> GetByConditionAsyc(Expression<Func<TEntity, bool>> func, Expression<Func<TEntity, object>> orderByProperty = null, bool descending = false, int limit = 0, int skip = 0)
+        {
+            try
+            {
+                var entityList = await _dataService.GetByCondition(func, orderByProperty, descending, limit, skip);
+
+                if (entityList.Any())
+                {
+                    return (from entity in entityList let business = new TBusiness() select MappingHelper.ConvertToModel(entity, business)).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogOrThrow(ex);
+            }
+            return new List<TBusiness>();
+        }
+
+        public async Task<int> CountByConditionAsync(Expression<Func<TEntity, bool>> func)
         {
             try
             {
@@ -133,7 +133,7 @@ namespace Famoser.SqliteWrapper.Repositories
             return -1;
         }
 
-        public async Task<bool> Add(TBusiness business)
+        public async Task<bool> AddAsync(TBusiness business)
         {
             try
             {
@@ -152,7 +152,7 @@ namespace Famoser.SqliteWrapper.Repositories
             return false;
         }
 
-        public async Task<bool> AddAll(List<TBusiness> business)
+        public async Task<bool> AddAllAsyc(List<TBusiness> business)
         {
             try
             {
@@ -175,7 +175,7 @@ namespace Famoser.SqliteWrapper.Repositories
             return false;
         }
 
-        public async Task<bool> Update(TBusiness business)
+        public async Task<bool> UpdateAsyc(TBusiness business)
         {
             try
             {
@@ -189,7 +189,7 @@ namespace Famoser.SqliteWrapper.Repositories
             return false;
         }
 
-        public async Task<bool> UpdateAll(List<TBusiness> business)
+        public async Task<bool> UpdateAllAsyc(List<TBusiness> business)
         {
             try
             {
@@ -203,14 +203,14 @@ namespace Famoser.SqliteWrapper.Repositories
             return false;
         }
 
-        public Task<bool> Save(TBusiness business)
+        public Task<bool> SaveAsyc(TBusiness business)
         {
             if (business.GetId() != 0)
-                return Update(business);
-            return Add(business);
+                return UpdateAsyc(business);
+            return AddAsync(business);
         }
 
-        public async Task<bool> SaveAll(List<TBusiness> business)
+        public async Task<bool> SaveAllAsyc(List<TBusiness> business)
         {
             try
             {
@@ -224,7 +224,7 @@ namespace Famoser.SqliteWrapper.Repositories
                         news.Add(business1);
                 }
 
-                return await AddAll(news) && await UpdateAll(updates);
+                return await AddAllAsyc(news) && await UpdateAllAsyc(updates);
             }
             catch (Exception ex)
             {
@@ -233,13 +233,13 @@ namespace Famoser.SqliteWrapper.Repositories
             return false;
         }
 
-        public async Task<bool> DeleteAll(List<TBusiness> business)
+        public async Task<bool> DeleteAllAsyc(List<TBusiness> business)
         {
             try
             {
                 var list = MappingHelper.ConvertAllToEntity<TEntity, TBusiness>(business);
                 var ids = list.Select(l => l.Id).ToList();
-                if (await DeleteAll(ids))
+                if (await DeleteAllAsyc(ids))
                 {
                     foreach (var business1 in business)
                     {
@@ -255,7 +255,7 @@ namespace Famoser.SqliteWrapper.Repositories
             return false;
         }
 
-        public async Task<bool> DeleteAll(List<int> ids)
+        public async Task<bool> DeleteAllAsyc(List<int> ids)
         {
             try
             {

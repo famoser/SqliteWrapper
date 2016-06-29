@@ -36,9 +36,9 @@ namespace Famoser.SqliteWrapper.Example.Repositories
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<MyModel> GetById(int id)
+        public async Task<MyModel> GetByIdAsync(int id)
         {
-            return await _genericRepo.GetById(id);
+            return await _genericRepo.GetByIdAsync(id);
         }
 
         /// <summary>
@@ -46,9 +46,9 @@ namespace Famoser.SqliteWrapper.Example.Repositories
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<bool> Save(MyModel model)
+        public async Task<bool> SaveAsync(MyModel model)
         {
-            return await _genericRepo.Save(model);
+            return await _genericRepo.SaveAsyc(model);
         }
 
         /// <summary>
@@ -56,9 +56,9 @@ namespace Famoser.SqliteWrapper.Example.Repositories
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<bool> Update(MyModel model)
+        public async Task<bool> UpdateAsync(MyModel model)
         {
-            return await _genericRepo.Update(model);
+            return await _genericRepo.UpdateAsyc(model);
         }
 
         /// <summary>
@@ -66,9 +66,9 @@ namespace Famoser.SqliteWrapper.Example.Repositories
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<bool> Delete(MyModel model)
+        public async Task<bool> DeleteAsync(MyModel model)
         {
-            return await _genericRepo.Delete(model);
+            return await _genericRepo.DeleteAsync(model);
         }
     }
 }
