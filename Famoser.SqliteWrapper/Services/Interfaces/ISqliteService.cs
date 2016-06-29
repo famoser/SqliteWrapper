@@ -14,70 +14,70 @@ namespace Famoser.SqliteWrapper.Services.Interfaces
         /// <typeparam name="T"></typeparam>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<T> GetById<T>(int id) where T : EntityBase, new();
+        Task<T> GetById<T>(int id) where T : BaseEntity, new();
         /// <summary>
         /// Retrieve all items with the specified ids
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="ids"></param>
         /// <returns></returns>
-        Task<List<T>> GetAllById<T>(IEnumerable<int> ids) where T : EntityBase, new();
+        Task<List<T>> GetAllById<T>(IEnumerable<int> ids) where T : BaseEntity, new();
         /// <summary>
         /// Retrieve all content of the table
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        Task<List<T>> GetAll<T>() where T : EntityBase, new();
+        Task<List<T>> GetAll<T>() where T : BaseEntity, new();
         /// <summary>
         /// Delete the item with the specified id
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<bool> DeleteById<T>(int id) where T : EntityBase, new();
+        Task<bool> DeleteById<T>(int id) where T : BaseEntity, new();
         /// <summary>
         /// Delete all items with the specified ids
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<bool> DeleteAllById<T>(IEnumerable<int> ids) where T : EntityBase, new();
+        Task<bool> DeleteAllById<T>(IEnumerable<int> ids) where T : BaseEntity, new();
         /// <summary>
         /// Delete all items
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        Task<bool> DeleteAll<T>() where T : EntityBase, new();
+        Task<bool> DeleteAll<T>() where T : BaseEntity, new();
         /// <summary>
         /// Add item
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        Task<int> Add<T>(T entity) where T : EntityBase, new();
+        Task<int> Add<T>(T entity) where T : BaseEntity, new();
         /// <summary>
         /// Add all items
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        Task<int> AddAll<T>(IEnumerable<T> entity) where T : EntityBase, new();
+        Task<int> AddAll<T>(IEnumerable<T> entity) where T : BaseEntity, new();
         /// <summary>
         /// Update item
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        Task<int> Update<T>(T entity) where T : EntityBase, new();
+        Task<int> Update<T>(T entity) where T : BaseEntity, new();
         /// <summary>
         /// Update all items
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        Task<int> UpdateAll<T>(IEnumerable<T> entity) where T : EntityBase, new();
+        Task<int> UpdateAll<T>(IEnumerable<T> entity) where T : BaseEntity, new();
         /// <summary>
         /// Retrieve item with the highest id from the specified table
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        Task<int> GetHighestId<T>() where T : EntityBase, new();
+        Task<int> GetHighestId<T>() where T : BaseEntity, new();
         /// <summary>
         /// Get a list of items with match the specified conditions
         /// </summary>
@@ -88,14 +88,14 @@ namespace Famoser.SqliteWrapper.Services.Interfaces
         /// <param name="limit"></param>
         /// <param name="skip"></param>
         /// <returns></returns>
-        Task<List<T>> GetByCondition<T>(Expression<Func<T, bool>> func, Expression<Func<T, object>> orderByProperty, bool descending, int limit, int skip) where T : EntityBase, new();
+        Task<List<T>> GetByCondition<T>(Expression<Func<T, bool>> func, Expression<Func<T, object>> orderByProperty, bool descending, int limit, int skip) where T : BaseEntity, new();
         /// <summary>
         /// Count all items with match the specified condition
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="func"></param>
         /// <returns></returns>
-        Task<int> CountByCondition<T>(Expression<Func<T, bool>> func) where T : EntityBase, new();
+        Task<int> CountByCondition<T>(Expression<Func<T, bool>> func) where T : BaseEntity, new();
 
         /// <summary>
         /// execute a raw query and retrieve an integer.
@@ -104,7 +104,7 @@ namespace Famoser.SqliteWrapper.Services.Interfaces
         /// <param name="query"></param>
         /// <param name="args"></param>
         /// <returns></returns>
-        Task<int> ExecuteAsync<T>(string query, params object[] args) where T : EntityBase, new();
+        Task<int> ExecuteAsync<T>(string query, params object[] args) where T : BaseEntity, new();
 
         /// <summary>
         /// execute a raw query and retrieve a scalar (e. g. "SELECT COUNT(*) FROM users WHERE prename=Margareth)
@@ -112,6 +112,6 @@ namespace Famoser.SqliteWrapper.Services.Interfaces
         /// <param name="query"></param>
         /// <param name="args"></param>
         /// <returns></returns>
-        Task<T> ExecuteScalarAsync<T>(string query, params object[] args) where T : EntityBase, new();
+        Task<T> ExecuteScalarAsync<T>(string query, params object[] args) where T : BaseEntity, new();
     }
 }

@@ -19,14 +19,14 @@ namespace Famoser.SqliteWrapper.Attributes
 
         private static readonly Dictionary<Type, Dictionary<Type, IEntityMappingConverter>> Converters = new Dictionary<Type, Dictionary<Type, IEntityMappingConverter>>();
 
-        public static bool RegisterConverter(IEntityMappingConverter converter, Type from, Type to)
+        public static bool RegisterConverter(IEntityMappingConverter converter, Type entityType, Type modelType)
         {
-            if (!Converters.ContainsKey(from))
-                Converters[from] = new Dictionary<Type, IEntityMappingConverter>();
+            if (!Converters.ContainsKey(entityType))
+                Converters[entityType] = new Dictionary<Type, IEntityMappingConverter>();
 
-            if (!Converters[from].ContainsKey(to))
+            if (!Converters[entityType].ContainsKey(modelType))
             {
-                Converters[from][to] = converter;
+                Converters[entityType][modelType] = converter;
                 return true;
             }
             return false;

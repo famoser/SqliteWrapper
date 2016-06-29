@@ -44,7 +44,7 @@
     <Compile Include="Exceptions\ConverterNotFoundException.cs" />
     <Compile Include="Exceptions\PropertyNotFoundException.cs" />
     <Compile Include="Helpers\MappingHelper.cs" />
-    <Compile Include="Entities\EntityBase.cs" />
+    <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Enums\EntityMappingProcedure.cs" />
     <Compile Include="Models\Interfaces\ISqliteModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

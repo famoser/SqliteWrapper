@@ -2,7 +2,7 @@
 
 namespace Famoser.SqliteWrapper.Entities
 {
-    public class EntityBase
+    public class BaseEntity
     {
         [AutoIncrement, PrimaryKey]
         public int Id { get; set; }

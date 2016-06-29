@@ -13,7 +13,7 @@ using SQLite.Net.Interop;
 
 namespace Famoser.SqliteWrapper.Services
 {
-    class SqliteService : ISqliteService
+    public class SqliteService : ISqliteService
     {
         private readonly ISQLitePlatform _sqLitePlatform;
         private readonly ISqliteServiceSettingsProvider _sqliteServiceSettingsProvider;
@@ -27,7 +27,7 @@ namespace Famoser.SqliteWrapper.Services
 
         private SQLiteAsyncConnection _myAsyncConnection;
         private SQLiteConnectionWithLock _myConnection;
-        private async Task<SQLiteAsyncConnection> GetConnection<T>() where T : EntityBase
+        private async Task<SQLiteAsyncConnection> GetConnection<T>() where T : BaseEntity
         {
             if (_myAsyncConnection == null)
             {
@@ -42,7 +42,7 @@ namespace Famoser.SqliteWrapper.Services
         }
 
         private readonly ConcurrentBag<Type> _existingTables = new ConcurrentBag<Type>();
-        private async Task CreateTableIfNeeded<T>() where T : EntityBase
+        private async Task CreateTableIfNeeded<T>() where T : BaseEntity
         {
             if (!_existingTables.Contains(typeof(T)))
             {
@@ -51,7 +51,7 @@ namespace Famoser.SqliteWrapper.Services
             }
         }
 
-        public async Task<T> GetById<T>(int id) where T : EntityBase, new()
+        public async Task<T> GetById<T>(int id) where T : BaseEntity, new()
         {
             using (await DatabaseLock.LockAsync())
             {
@@ -60,7 +60,7 @@ namespace Famoser.SqliteWrapper.Services
             }
         }
 
-        public async Task<List<T>> GetAllById<T>(IEnumerable<int> ids) where T : EntityBase, new()
+        public async Task<List<T>> GetAllById<T>(IEnumerable<int> ids) where T : BaseEntity, new()
         {
             using (await DatabaseLock.LockAsync())
             {
@@ -69,7 +69,7 @@ namespace Famoser.SqliteWrapper.Services
             }
         }
 
-        public async Task<List<T>> GetAll<T>() where T : EntityBase, new()
+        public async Task<List<T>> GetAll<T>() where T : BaseEntity, new()
         {
             using (await DatabaseLock.LockAsync())
             {
@@ -78,7 +78,7 @@ namespace Famoser.SqliteWrapper.Services
             }
         }
 
-        public async Task<bool> DeleteAllById<T>(IEnumerable<int> ids) where T : EntityBase, new()
+        public async Task<bool> DeleteAllById<T>(IEnumerable<int> ids) where T : BaseEntity, new()
         {
             var args = string.Join(",", ids);
             using (await DatabaseLock.LockAsync())
@@ -89,7 +89,7 @@ namespace Famoser.SqliteWrapper.Services
             return true;
         }
 
-        public async Task<bool> DeleteAll<T>() where T : EntityBase, new()
+        public async Task<bool> DeleteAll<T>() where T : BaseEntity, new()
         {
             using (await DatabaseLock.LockAsync())
             {
@@ -98,7 +98,7 @@ namespace Famoser.SqliteWrapper.Services
             return true;
         }
 
-        public async Task<int> Add<T>(T obj) where T : EntityBase, new()
+        public async Task<int> Add<T>(T obj) where T : BaseEntity, new()
         {
             using (await DatabaseLock.LockAsync())
             {
@@ -106,7 +106,7 @@ namespace Famoser.SqliteWrapper.Services
             }
         }
 
-        public async Task<int> AddAll<T>(IEnumerable<T> obj) where T : EntityBase, new()
+        public async Task<int> AddAll<T>(IEnumerable<T> obj) where T : BaseEntity, new()
         {
             using (await DatabaseLock.LockAsync())
             {
@@ -114,7 +114,7 @@ namespace Famoser.SqliteWrapper.Services
             }
         }
 
-        public async Task<int> Update<T>(T obj) where T : EntityBase, new()
+        public async Task<int> Update<T>(T obj) where T : BaseEntity, new()
         {
             using (await DatabaseLock.LockAsync())
             {
@@ -122,7 +122,7 @@ namespace Famoser.SqliteWrapper.Services
             }
         }
 
-        public async Task<int> UpdateAll<T>(IEnumerable<T> obj) where T : EntityBase, new()
+        public async Task<int> UpdateAll<T>(IEnumerable<T> obj) where T : BaseEntity, new()
         {
             using (await DatabaseLock.LockAsync())
             {
@@ -130,7 +130,7 @@ namespace Famoser.SqliteWrapper.Services
             }
         }
 
-        public async Task<int> GetHighestId<T>() where T : EntityBase, new()
+        public async Task<int> GetHighestId<T>() where T : BaseEntity, new()
         {
             using (await DatabaseLock.LockAsync())
             {
@@ -139,7 +139,7 @@ namespace Famoser.SqliteWrapper.Services
             }
         }
 
-        public async Task<bool> DeleteById<T>(int id) where T : EntityBase, new()
+        public async Task<bool> DeleteById<T>(int id) where T : BaseEntity, new()
         {
             using (await DatabaseLock.LockAsync())
             {
@@ -148,7 +148,7 @@ namespace Famoser.SqliteWrapper.Services
             return true;
         }
 
-        public async Task<List<T>> GetByCondition<T>(Expression<Func<T, bool>> func, Expression<Func<T, object>> orderByProperty, bool descending, int limit, int skip) where T : EntityBase, new()
+        public async Task<List<T>> GetByCondition<T>(Expression<Func<T, bool>> func, Expression<Func<T, object>> orderByProperty, bool descending, int limit, int skip) where T : BaseEntity, new()
         {
             using (await DatabaseLock.LockAsync())
             {
@@ -188,7 +188,7 @@ namespace Famoser.SqliteWrapper.Services
             }
         }
 
-        public async Task<int> CountByCondition<T>(Expression<Func<T, bool>> func) where T : EntityBase, new()
+        public async Task<int> CountByCondition<T>(Expression<Func<T, bool>> func) where T : BaseEntity, new()
         {
             using (await DatabaseLock.LockAsync())
             {
@@ -197,7 +197,7 @@ namespace Famoser.SqliteWrapper.Services
             }
         }
 
-        public async Task<int> ExecuteAsync<T>(string query, params object[] args) where T : EntityBase, new()
+        public async Task<int> ExecuteAsync<T>(string query, params object[] args) where T : BaseEntity, new()
         {
             using (await DatabaseLock.LockAsync())
             {
@@ -205,7 +205,7 @@ namespace Famoser.SqliteWrapper.Services
             }
         }
 
-        public async Task<T> ExecuteScalarAsync<T>(string query, params object[] args) where T : EntityBase, new()
+        public async Task<T> ExecuteScalarAsync<T>(string query, params object[] args) where T : BaseEntity, new()
         {
             using (await DatabaseLock.LockAsync())
             {

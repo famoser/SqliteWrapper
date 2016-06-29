@@ -13,7 +13,7 @@ namespace Famoser.SqliteWrapper.Repositories
 {
     public class GenericRepository<TBusiness, TEntity>
              where TBusiness : class, ISqliteModel, new()
-             where TEntity : EntityBase, new()
+             where TEntity : BaseEntity, new()
     {
         private readonly ISqliteService _dataService;
         private readonly IExceptionLogger _exceptionLogger;
