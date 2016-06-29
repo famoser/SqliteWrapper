@@ -4,7 +4,7 @@ namespace Famoser.SqliteWrapper.Exceptions
 {
     public class PropertyNotFoundException : Exception
     {
-        public PropertyNotFoundException(Type entityType, Type modelType, string propertyName) : base("No converter could be found for those types")
+        public PropertyNotFoundException(Type entityType, Type modelType, string propertyName) : base("requested property not found! Check your mapping attributes")
         {
             EntityType = entityType;
             ModelType = modelType;

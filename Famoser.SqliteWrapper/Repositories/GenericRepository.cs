@@ -58,7 +58,11 @@ namespace Famoser.SqliteWrapper.Repositories
             try
             {
                 var entity = MappingHelper.ConvertToEntity(business, new TEntity());
-                return await Delete(entity.Id);
+                if (await Delete(entity.Id))
+                {
+                    business.SetId(0);
+                    return true;
+                }
             }
             catch (Exception ex)
             {
@@ -135,9 +139,9 @@ namespace Famoser.SqliteWrapper.Repositories
             {
                 var entity = MappingHelper.ConvertToEntity(business, new TEntity());
                 int id = await _dataService.Add(entity);
-                if (id != -1)
+                if (id == 1)
                 {
-                    business.SetId(id);
+                    business.SetId(entity.Id);
                     return true;
                 }
             }
@@ -235,7 +239,14 @@ namespace Famoser.SqliteWrapper.Repositories
             {
                 var list = MappingHelper.ConvertAllToEntity<TEntity, TBusiness>(business);
                 var ids = list.Select(l => l.Id).ToList();
-                return await DeleteAll(ids);
+                if (await DeleteAll(ids))
+                {
+                    foreach (var business1 in business)
+                    {
+                        business1.SetId(0);
+                    }
+                    return true;
+                }
             }
             catch (Exception ex)
             {

@@ -8,8 +8,7 @@ namespace Famoser.SqliteWrapper.Example.Models
 {
     public class MyModel : ISqliteModel
     {
-        [EntityMap]
-        public int MyId { get; set; }
+        private int DatabaseId { get; set; }
 
         [EntityMap]
         public string MyStringProp { get; set; }
@@ -27,12 +26,12 @@ namespace Famoser.SqliteWrapper.Example.Models
 
         public int GetId()
         {
-            return MyId;
+            return DatabaseId;
         }
 
         public void SetId(int id)
         {
-            MyId = id;
+            DatabaseId = id;
         }
     }
 }

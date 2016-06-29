@@ -2,8 +2,10 @@
 using System.Linq;
 using System.Reflection;
 using Famoser.SqliteWrapper.Attributes;
+using Famoser.SqliteWrapper.Entities;
 using Famoser.SqliteWrapper.Enums;
 using Famoser.SqliteWrapper.Exceptions;
+using Famoser.SqliteWrapper.Models.Interfaces;
 
 namespace Famoser.SqliteWrapper.Helpers
 {
@@ -15,9 +17,9 @@ namespace Famoser.SqliteWrapper.Helpers
         /// <param name="entity">the Entity object, the "source"</param>
         /// <param name="model"></param>
         /// <returns>the Model</returns>
-        public static TModel ConvertToModel<TModel, TEntity>(TEntity entity, TModel model = null)
-            where TEntity : class, new()
-            where TModel : class, new()
+        public static TModel ConvertToModel<TModel, TEntity>(TEntity entity, TModel model)
+            where TEntity : BaseEntity, new()
+            where TModel : ISqliteModel, new()
         {
             if (model == null)
                 model = new TModel();
@@ -55,19 +57,20 @@ namespace Famoser.SqliteWrapper.Helpers
                 }
             }
 
+            model.SetId(entity.Id);
             return model;
         }
 
         public static List<TModel> ConvertAllToModel<TModel, TEntity>(List<TEntity> entity)
-            where TModel : class, new()
-            where TEntity : class, new()
+            where TEntity : BaseEntity, new()
+            where TModel : ISqliteModel, new()
         {
-            return entity.Select(t => ConvertToModel<TModel, TEntity>(t)).ToList();
+            return entity.Select(t => ConvertToModel<TModel, TEntity>(t, new TModel())).ToList();
         }
 
         public static List<TEntity> ConvertAllToEntity<TEntity, TModel>(List<TModel> business)
-            where TEntity : class, new()
-            where TModel : class, new()
+            where TEntity : BaseEntity, new()
+            where TModel : ISqliteModel, new()
         {
             return business.Select(t => ConvertToEntity<TEntity, TModel>(t)).ToList();
         }
@@ -79,8 +82,8 @@ namespace Famoser.SqliteWrapper.Helpers
         /// <param name="entity"></param>
         /// <returns>the Entity object (same instance as passed)</returns>
         public static TEntity ConvertToEntity<TEntity, TModel>(TModel model, TEntity entity = null)
-            where TEntity : class, new()
-            where TModel : class, new()
+            where TEntity : BaseEntity, new()
+            where TModel : ISqliteModel, new()
         {
             if (entity == null)
                 entity = new TEntity();
@@ -114,12 +117,12 @@ namespace Famoser.SqliteWrapper.Helpers
                         else
                         {
                             throw new PropertyNotFoundException(typeof(TEntity), typeof(TModel), propertyInfo.Name);
-
                         }
                     }
                 }
             }
 
+            entity.Id = model.GetId();
             return entity;
         }
 

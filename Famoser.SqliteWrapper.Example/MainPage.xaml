@@ -8,6 +8,24 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="1" Grid.Column="1">
+                <Button Content="0: Add" Click="AddButton" />
+                <Button Content="1: Save" Click="SaveButton" />
+                <Button Content="2: Load" Click="LoadButton" />
+                <Button Content="3: Remove" Click="RemoveButton" />
+                <TextBlock Text="0" TextAlignment="Center" x:Name="InfoTextBlock" />
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>
