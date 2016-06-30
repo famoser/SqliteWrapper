@@ -148,7 +148,7 @@ namespace Famoser.SqliteWrapper.Services
             return true;
         }
 
-        public async Task<List<T>> GetByCondition<T>(Expression<Func<T, bool>> func, Expression<Func<T, object>> orderByProperty, bool descending, int limit, int skip) where T : BaseEntity, new()
+        public async Task<List<T>> GetByCondition<T>(Expression<Func<T, bool>> func, Expression<Func<T, object>> orderByProperty = null, bool descending = false, int limit = 0, int skip = 0) where T : BaseEntity, new()
         {
             using (await DatabaseLock.LockAsync())
             {
