@@ -6,7 +6,7 @@ using Famoser.SqliteWrapper.Entities;
 
 namespace Famoser.SqliteWrapper.Services.Interfaces
 {
-    public interface ISqliteService
+    public interface ISqliteService : IDisposable
     {
         /// <summary>
         /// Retrieve the item with the specified id

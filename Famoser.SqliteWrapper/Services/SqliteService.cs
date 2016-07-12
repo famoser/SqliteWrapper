@@ -13,7 +13,7 @@ using SQLite.Net.Interop;
 
 namespace Famoser.SqliteWrapper.Services
 {
-    public class SqliteService : ISqliteService
+    public class SqliteService : ISqliteService, IDisposable
     {
         private readonly ISQLitePlatform _sqLitePlatform;
         private readonly ISqliteServiceSettingsProvider _sqliteServiceSettingsProvider;
@@ -27,10 +27,13 @@ namespace Famoser.SqliteWrapper.Services
 
         private SQLiteAsyncConnection _myAsyncConnection;
         private SQLiteConnectionWithLock _myConnection;
+        private bool _disposed;
         private async Task<SQLiteAsyncConnection> GetConnection<T>() where T : BaseEntity
         {
             if (_myAsyncConnection == null)
             {
+                if (_disposed)
+                    return null;
                 string databaseFile = await _sqliteServiceSettingsProvider.GetFullPathOfDatabase();
                 _myConnection = new SQLiteConnectionWithLock(_sqLitePlatform, new SQLiteConnectionString(databaseFile, false));
                 _myAsyncConnection = new SQLiteAsyncConnection(() => _myConnection);
@@ -211,6 +214,13 @@ namespace Famoser.SqliteWrapper.Services
             {
                 return await (await GetConnection<T>()).ExecuteScalarAsync<T>(query, args);
             }
+        }
+
+        public void Dispose()
+        {
+            _disposed = true;
+            _myAsyncConnection = null;
+            _myConnection.Dispose();
         }
     }
 }
